@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // That will configure our APi key as soon as app launches
         // Provide the API key to the Google places client
-        GMSPlacesClient.provideAPIKey("AIzaSyD6-djNbx6qEiPJm0uzYx-pzBbrqItkJnU")
+        GMSPlacesClient.provideAPIKey("AIzaSyAeXdf9PYa-IJQEPhxoRTSx7XKy93PFxyQ")
         
         return true
     }

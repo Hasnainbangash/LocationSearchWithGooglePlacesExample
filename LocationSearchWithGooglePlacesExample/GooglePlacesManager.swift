@@ -7,6 +7,7 @@
 
 import Foundation
 import GooglePlaces
+import CoreLocation
 
 struct Place {
     let name: String
@@ -26,6 +27,7 @@ final class GooglePlacesManager {
     // Create a custom enum
     enum PlacesError: Error {
         case failedToFind
+        case failedToGetCoordinates
     }
     
     public func findPlaces(query: String, completion: @escaping (Result<[Place], Error>) -> Void) {
@@ -35,6 +37,12 @@ final class GooglePlacesManager {
         filter.type = .geocode
         
         client.findAutocompletePredictions(fromQuery: query, filter: filter, sessionToken: nil) { results, error in
+            print("------------------------------------------")
+            if let error = error {
+                print(error)
+            }
+            print("------------------------------------------")
+            
             guard let results = results, error == nil else {
                 completion(.failure(PlacesError.failedToFind))
                 return
@@ -47,5 +55,21 @@ final class GooglePlacesManager {
             completion(.success(places))
             
         }
+    }
+    
+    public func resolveLocation(for place: Place, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void ) {
+        
+        client.fetchPlace(fromPlaceID: place.identifier, placeFields: .coordinate, sessionToken: nil) { googlePlace, error in
+            guard let googlePlace = googlePlace, error == nil else {
+                completion(.failure(PlacesError.failedToGetCoordinates))
+                return
+            }
+            
+            let coordinate = CLLocationCoordinate2D(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
+            
+            completion(.success(coordinate))
+            
+        }
+        
     }
 }
