@@ -1,0 +1,6 @@
+framework module Pods_LocationSearchWithGooglePlacesExample {
+  umbrella header "Pods-LocationSearchWithGooglePlacesExample-umbrella.h"
+
+  export *
+  module * { export * }
+}

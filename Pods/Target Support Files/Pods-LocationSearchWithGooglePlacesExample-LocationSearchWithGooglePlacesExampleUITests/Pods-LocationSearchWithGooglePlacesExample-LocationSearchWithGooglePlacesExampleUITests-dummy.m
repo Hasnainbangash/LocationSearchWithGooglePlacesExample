@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_LocationSearchWithGooglePlacesExample_LocationSearchWithGooglePlacesExampleUITests : NSObject
+@end
+@implementation PodsDummy_Pods_LocationSearchWithGooglePlacesExample_LocationSearchWithGooglePlacesExampleUITests
+@end
