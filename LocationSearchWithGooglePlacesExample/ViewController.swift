@@ -64,7 +64,12 @@ extension ViewController: ResultsViewControllerDelegate {
         // Get rid of the keyboard by use this
         searchVC.searchBar.resignFirstResponder()
         
+        // Code to remove the searching
+        searchVC.dismiss(animated: true, completion: nil)
+        
         // Remove all map pins
+        let annotations =  mapView.annotations
+        mapView.removeAnnotations(annotations)
         
         // Add a map pin
         let pin = MKPointAnnotation()
