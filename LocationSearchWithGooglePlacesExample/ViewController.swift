@@ -12,11 +12,15 @@ class ViewController: UIViewController {
 
     let mapView = MKMapView()
     
+    let searchVC = UISearchController(searchResultsController: ResultsViewController())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "Maps"
         view.addSubview(mapView)
+        
+        navigationItem.searchController = searchVC
     }
     
     override func viewDidLayoutSubviews() {
