@@ -8,6 +8,11 @@
 import Foundation
 import GooglePlaces
 
+struct Place {
+    let name: String
+    let identifier: String
+}
+
 final class GooglePlacesManager {
     // Shared instanse of this class
     static let shared = GooglePlacesManager()
@@ -18,18 +23,34 @@ final class GooglePlacesManager {
     // Privitiaze the initilalizer
     private init() {}
     
+    // Create a custom enum
+    enum PlacesError: Error {
+        case failedToFind
+    }
+    
     public func setup() {
         // Provode the API key to the Google places client
         GMSPlacesClient.provideAPIKey("AIzaSyD6-djNbx6qEiPJm0uzYx-pzBbrqItkJnU")
     }
     
-    public func findPlaces(query: String, completion: @escaping (Result<[String], Error>)) -> Void {
+    public func findPlaces(query: String, completion: @escaping (Result<[Place], Error>) -> Void) {
         
+        // Create a custom filter
         let filter = GMSAutocompleteFilter()
         filter.type = .geocode
         
         client.findAutocompletePredictions(fromQuery: query, filter: filter, sessionToken: nil) { results, error in
-            guard let results = results, error == nil else {return}
+            guard let results = results, error == nil else {
+                completion(.failure(PlacesError.failedToFind))
+                return
+            }
+            
+            let places: [Place] = results.compactMap {
+                Place(name: $0.attributedFullText.string, identifier: $0.placeID)
+            }
+            
+            completion(.success(places))
+            
         }
     }
 }
