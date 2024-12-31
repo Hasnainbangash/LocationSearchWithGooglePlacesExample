@@ -22,4 +22,14 @@ final class GooglePlacesManager {
         // Provode the API key to the Google places client
         GMSPlacesClient.provideAPIKey("AIzaSyD6-djNbx6qEiPJm0uzYx-pzBbrqItkJnU")
     }
+    
+    public func findPlaces(query: String, completion: @escaping (Result<[String], Error>)) -> Void {
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .geocode
+        
+        client.findAutocompletePredictions(fromQuery: query, filter: filter, sessionToken: nil) { results, error in
+            guard let results = results, error == nil else {return}
+        }
+    }
 }
