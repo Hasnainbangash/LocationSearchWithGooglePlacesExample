@@ -28,11 +28,6 @@ final class GooglePlacesManager {
         case failedToFind
     }
     
-    public func setup() {
-        // Provode the API key to the Google places client
-        GMSPlacesClient.provideAPIKey("AIzaSyD6-djNbx6qEiPJm0uzYx-pzBbrqItkJnU")
-    }
-    
     public func findPlaces(query: String, completion: @escaping (Result<[Place], Error>) -> Void) {
         
         // Create a custom filter

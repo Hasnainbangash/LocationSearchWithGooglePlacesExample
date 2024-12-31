@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // That will configure our APi key as soon as app launches
-        GooglePlacesManager.shared.setup()
+        // Provide the API key to the Google places client
+        GMSPlacesClient.provideAPIKey("AIzaSyD6-djNbx6qEiPJm0uzYx-pzBbrqItkJnU")
         
         return true
     }
