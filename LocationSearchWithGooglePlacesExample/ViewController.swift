@@ -60,6 +60,10 @@ class ViewController: UIViewController, UISearchResultsUpdating {
 
 extension ViewController: ResultsViewControllerDelegate {
     func didTapPlace(with coordinates: CLLocationCoordinate2D) {
+        
+        // Get rid of the keyboard by use this
+        searchVC.searchBar.resignFirstResponder()
+        
         // Remove all map pins
         
         // Add a map pin
