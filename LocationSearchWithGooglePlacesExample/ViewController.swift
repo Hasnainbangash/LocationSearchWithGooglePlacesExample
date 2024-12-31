@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchResultsUpdating {
 
     let mapView = MKMapView()
     
@@ -20,12 +20,17 @@ class ViewController: UIViewController {
         title = "Maps"
         view.addSubview(mapView)
         
+        searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mapView.frame = view.bounds
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        <#code#>
     }
 
 }
