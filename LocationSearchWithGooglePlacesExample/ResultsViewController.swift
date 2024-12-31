@@ -9,7 +9,7 @@ class ResultsViewController: UIViewController {
     }()
 
     private var places: [Place] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
