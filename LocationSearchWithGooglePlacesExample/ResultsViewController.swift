@@ -18,6 +18,17 @@ class ResultsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
+    public func update(with places: [Place]) {
+        self.places = places
+        tableView.reloadData()
+    }
+    
 }
 
 extension ResultsViewController: UITableViewDataSource {

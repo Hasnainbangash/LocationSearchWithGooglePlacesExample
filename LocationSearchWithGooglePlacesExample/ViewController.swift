@@ -36,7 +36,7 @@ class ViewController: UIViewController, UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let query = searchController.searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+        guard let query = searchController.searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, let resultVC = searchController.searchResultsUpdater as? ResultsViewController else {
             return
         }
         
@@ -44,6 +44,9 @@ class ViewController: UIViewController, UISearchResultsUpdating {
             switch result {
             case .success(let places):
                 print(places)
+                DispatchQueue.main.async {
+                    resultVC.update(with: places)
+                }
             case .failure(let error):
                 print(error)
             }
